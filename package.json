@@ -1,0 +1,34 @@
+{
+  "name": "bazar-app",
+  "version": "0.0.1",
+  "description": "demo usage of bazar suite",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "/"
+  },
+  "keywords": [
+    "ecommerce",
+    "nodejs",
+    "mongodb"
+  ],
+  "author": "gottfried",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongodb": "^4.11.0"
+  },
+  "devDependencies": {
+    "bson": "^4.7.0",
+    "css-loader": "^6.7.1",
+    "mini-css-extract-plugin": "^2.6.1",
+    "sass": "^1.55.0",
+    "sass-loader": "^13.1.0",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
+  }
+}
