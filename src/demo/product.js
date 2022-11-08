@@ -3,7 +3,7 @@ import './product.css'
 import {ObjectId} from 'bson'
 
 function send(data) {
-    return fetch('api/admin/product/create', {
+    return fetch('/api/admin/product/create', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -13,7 +13,7 @@ function send(data) {
 }
 
 function successCreate(res) {
-    return fetch(`api/admin/product/${res.body}`, {method: 'GET'})
+    return fetch(`/api/admin/product/${res.body}`, {method: 'GET'})
     .then(res => {
         return res.json().then((body) => {
             return {res, body}
