@@ -4,8 +4,8 @@ import { fileURLToPath } from 'url';
 import express from 'express'
 import {MongoClient} from 'mongodb'
 
-import {api as _api} from '../api/src/index.js'
-import _store from '../store/src/index.js'
+import {api as _api} from '../bazar-api/src/index.js'
+import _store from '../bazar-store/src/index.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
