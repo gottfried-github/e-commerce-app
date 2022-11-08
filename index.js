@@ -53,6 +53,7 @@ function main(port) {
     app.use(session(sessionOptions))
     
     app.use('/', express.static(path.join(__dirname, './dist/front-end')))
+    app.use('/demo', express.static(path.join(__dirname, './dist/demo')))
     app.use('/api/', api)
 
     /* start server */
