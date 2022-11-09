@@ -7,12 +7,14 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export default {
     output: {
-        path: path.resolve(__dirname, 'dist/front-end'),
+        path: path.resolve(__dirname, 'dist/demo'),
         filename: '[name].js',
         assetModuleFilename: '[name][ext]'
       },
     entry: {
-        product: './src/front-end/product.js'
+        product: './src/demo/product.js',
+        signup: './src/demo/signup.js',
+        login: './src/demo/login.js'
     },
     mode: "development",
     devtool: 'inline-source-map',
