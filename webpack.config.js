@@ -12,7 +12,9 @@ export default {
         assetModuleFilename: '[name][ext]'
       },
     entry: {
-        product: './src/demo/product.js'
+        product: './src/demo/product.js',
+        signup: './src/demo/signup.js',
+        login: './src/demo/login.js'
     },
     mode: "development",
     devtool: 'inline-source-map',
