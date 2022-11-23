@@ -7,14 +7,15 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export default {
     output: {
-        path: path.resolve(__dirname, 'dist/demo'),
+        path: path.resolve(__dirname, 'dist/front-end'),
         filename: '[name].js',
         assetModuleFilename: '[name][ext]'
       },
     entry: {
-        product: './src/demo/product.js',
-        signup: './src/demo/signup.js',
-        login: './src/demo/login.js'
+        index: './src/front-end/index.js',
+        'demo-product': './src/demo/product.js',
+        'demo-signup': './src/demo/signup.js',
+        'demo-login': './src/demo/login.js'
     },
     mode: "development",
     devtool: 'inline-source-map',
@@ -42,14 +43,12 @@ export default {
                 "sass-loader",
             ],
           },
-          /*
           {
             test: /\.(js|jsx)$/,
             exclude: /(node_modules|bower_components)/,
             loader: "babel-loader",
-            options: { presets: ["@babel/env"] }
+            options: { presets: ["@babel/env", "@babel/preset-react"] }
           },
-          */
         ]
       },
       plugins: [
