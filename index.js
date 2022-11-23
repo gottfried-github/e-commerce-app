@@ -7,8 +7,8 @@ import SessionStorage from 'connect-mongo'
 import express from 'express'
 import {MongoClient} from 'mongodb'
 
-import {api as _api} from '../bazar-api/src/index.js'
-import _store from '../bazar-store/src/index.js'
+import {api as _api} from '../fi-api/src/index.js'
+import _store from '../fi-mongo/src/index.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -52,8 +52,8 @@ function main(port) {
 
     app.use(session(sessionOptions))
     
-    app.use('/', express.static(path.join(__dirname, './dist/front-end')))
-    app.use('/demo', express.static(path.join(__dirname, './dist/demo')))
+    app.use('/admin', express.static(path.join(__dirname, './dist/front-end')))
+    // app.use('/demo', express.static(path.join(__dirname, './dist/demo')))
     app.use('/api/', api)
 
     /* start server */
