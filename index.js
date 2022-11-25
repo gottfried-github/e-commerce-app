@@ -51,9 +51,15 @@ function main(port) {
     const app = express()
 
     app.use(session(sessionOptions))
-    
+
     app.use('/admin', express.static(path.join(__dirname, './dist/front-end')))
     // app.use('/demo', express.static(path.join(__dirname, './dist/demo')))
+
+    // send index.html from anywhere: let front-end handle routing
+    app.use("/admin/*", (req, res, next) => {
+        res.sendFile(path.join(__dirname, './dist/front-end/index.html'))
+    })
+
     app.use('/api/', api)
 
     /* start server */
