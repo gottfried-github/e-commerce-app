@@ -1,5 +1,5 @@
 import path from 'path';
-import { fileURLToPath } from 'url';
+import {fileURLToPath} from 'url';
 
 import session from 'express-session'
 import SessionStorage from 'connect-mongo'
