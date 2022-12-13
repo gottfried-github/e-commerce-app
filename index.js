@@ -45,7 +45,10 @@ function main(port) {
 
     /* initialize store and api */
     const store = _store(client.db(process.env.APP_DB_NAME), client)
-    const api = _api(store, {productUploadPath: path.join(__dirname, 'dist/public/product')})
+    const api = _api(store, {
+        productUploadPath: path.join(__dirname, 'public/product'), 
+        productDiffPath: path.join(__dirname, 'public')
+    })
 
     /* express application setup */
     const app = express()
@@ -54,11 +57,13 @@ function main(port) {
 
     app.use('/admin', express.static(path.join(__dirname, './dist/front-end')))
     // app.use('/demo', express.static(path.join(__dirname, './dist/demo')))
-
+    
     // send index.html from anywhere: let front-end handle routing
     app.use("/admin/*", (req, res, next) => {
         res.sendFile(path.join(__dirname, './dist/front-end/index.html'))
     })
+
+    app.use('/', express.static(path.join(__dirname, './public')))
 
     app.use('/api/', api)
 
