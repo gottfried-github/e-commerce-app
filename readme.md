@@ -1,93 +1,25 @@
 # Description
-A modular e-commerce application. Consists of [fi-mongo](), [fi-api]() and [fi-front-end]().
+A modular e-commerce application. Consists of [e-commerce-api](), [e-commerce-front-end]() and [e-commerce-mongo]().
 
-# Api
-## Specification
-See the specification [here](#fi-api).
-
-## The function of api
-**Inward.** Api transmits the received data over to the store. In doing so, it should make sure that:
-1. appropriate fields exist in the received data
-2. the values are of the correct type
-3. fields that don't belong to data, don't exist
-
-**Outward.** Assign status codes and messages to the output of the store and send it in response to the client.
-
-# Store api
-## Validation error format
-`ajv-errors-to-data-tree`-formatted tree resembling the input data, with the errors being `ValidationError`, `FieldMissing`, `TypeErrorMsg`
-
-## create
-### parameters
-  1. `fields`
-
-### behavior
-* **success**: return id of created document
-* **validation failure**: throw validation error
-
-Any other error shall be treated as an internal error.
-
-## update
-### parameters
-  1. `id`
-  2. `write`
-  3. `remove`
-
-### behavior
-  * **success**: return `true`
-  * **invalid `id` or no document with given id**: throw `InvalidCriterion`
-  * **validation failure**: throw validation error
-
-Any other error shall be treated as an internal error.
-
-## update photos
-### parameters
-1. `id`
-2. `photos`
-
-### behavior
-* **success**: return `true`
-* **invalid `id`**: throw `InvalidCriterion`
-* **validation failure**: throw validation error
-* **no document with given `id`**: return `null`
-
-## delete
-### parameters
-  1. `id`
-
-### behavior
-  * **success**: return `true`
-  * **invalid `id` or no document with given id**: throw `InvalidCriterion`
-
-Any other error shall be treated as an internal error.
-
-## getById
-### parameters
-  1. `id`
-
-### behavior
-  * **success**: return the found document
-  * **no document found**: return `null`
-  * **invalid id**: throw `InvalidCriterion`
-
-Any other error shall be treated as an internal error.
+* [REST API specification](e-commerce-api#rest-api)
+* [store API specification](e-commerce-api#store-api)
 
 # Run
 ## Preparations
 ### Clone the repos
-Clone [fi-common](), [fi-mongo](), [fi-api](), [fi-front-end](), [fi-app]() into a common root directory. Perform all further instructions inside that directory.
+Clone [e-commerce-common](), [e-commerce-mongo](), [e-commerce-api](), [e-commerce-front-end](), [e-commerce-app]() into a common root directory. Perform all further instructions inside that directory.
 
 ### Keyfile path
 `data/keyfile`
 
 ### Network name
-`bazar-wip` or whatever you like
+`e-commerce-wip` or whatever you like
 
 ### Database user password
 `init.sh` will create user with name *app*. It needs us to pass it a password for this user.
 
 ## Instructions
-From each of the subfolders - `fi-api`, `fi-store`, `fi-common` and `fi-front-end` - run `npm install`;
+From each of the subfolders - `e-commerce-common`, `e-commerce-mongo`, `e-commerce-api`, `e-commerce-front-end`, `e-commerce-app` - run `npm install`. 
 
 All further steps have to be done from the root directory unless stated otherwise.
 

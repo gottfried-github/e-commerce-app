@@ -20,7 +20,7 @@ function main(port) {
     // express-session uses this
     if (!process.env.SESSION_SECRETS) throw new Error('SESSION_SECRETS environment variable must be set')
 
-    /* express-session setup (see `express-session` in api) */
+    /* express-session setup (see `express-session` in e-commerce-api) */
     const sessionOptions = {
         secret: process.env.SESSION_SECRETS.split(' '),
         saveUninitialized: false,
