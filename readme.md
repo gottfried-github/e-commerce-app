@@ -1,5 +1,5 @@
 # Description
-A modular e-commerce application. Consists of [e-commerce-api](), [e-commerce-front-end]() and [e-commerce-mongo]().
+A modular e-commerce application. Consists of [e-commerce-api](https://github.com/gottfried-github/e-commerce-api), [e-commerce-react](https://github.com/gottfried-github/e-commerce-react) and [e-commerce-mongo](https://github.com/gottfried-github/e-commerce-mongo).
 
 * [REST API specification](e-commerce-api#rest-api)
 * [store API specification](e-commerce-api#store-api)
@@ -7,7 +7,7 @@ A modular e-commerce application. Consists of [e-commerce-api](), [e-commerce-fr
 # Run
 ## Preparations
 ### Clone the repos
-Clone [e-commerce-common](), [e-commerce-mongo](), [e-commerce-api](), [e-commerce-front-end](), [e-commerce-app]() into a common root directory. Perform all further instructions inside that directory.
+Clone [e-commerce-common](https://github.com/gottfried-github/e-commerce-common), [e-commerce-mongo](https://github.com/gottfried-github/e-commerce-mongo), [e-commerce-api](https://github.com/gottfried-github/e-commerce-api), [e-commerce-react](https://github.com/gottfried-github/e-commerce-react), [e-commerce-app](https://github.com/gottfried-github/e-commerce-app) into a common root directory. Perform all further instructions inside that directory.
 
 ### Keyfile path
 `data/keyfile`
