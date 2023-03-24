@@ -1,8 +1,8 @@
 # Description
 A modular e-commerce application. Consists of [e-commerce-api](https://github.com/gottfried-github/e-commerce-api), [e-commerce-react](https://github.com/gottfried-github/e-commerce-react) and [e-commerce-mongo](https://github.com/gottfried-github/e-commerce-mongo).
 
-* [REST API specification](e-commerce-api#rest-api)
-* [store API specification](e-commerce-api#store-api)
+* [REST API specification](https://github.com/gottfried-github/e-commerce-api#rest-api)
+* [store API specification](https://github.com/gottfried-github/e-commerce-api#store-api)
 
 # Run
 ## Preparations
