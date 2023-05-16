@@ -1,9 +1,9 @@
 import Main from '../../../fi-front-end/src/admin.js'
-import '../../../fi-front-end/src/styles/index.scss'
+import '../../../fi-front-end/src/styles/admin.scss'
 
 import api from '../../../fi-api/src/client/index.js'
 
-import './index.html'
+import './admin.html'
 
 function main() {
     Main(document.querySelector('#main'), api)

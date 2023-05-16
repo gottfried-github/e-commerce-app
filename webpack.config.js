@@ -12,7 +12,8 @@ export default {
         assetModuleFilename: '[name][ext]'
       },
     entry: {
-        index: './src/front-end/index.js',
+        admin: './src/front-end/admin.js',
+        visitor: './src/front-end/visitor.js',
         'demo-product': './src/demo/product.js',
         'demo-signup': './src/demo/signup.js',
         'demo-login': './src/demo/login.js'
