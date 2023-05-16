@@ -1,4 +1,6 @@
 import Main from '../../../fi-front-end/src/admin.js'
+import '../../../fi-front-end/src/styles/index.scss'
+
 import api from '../../../fi-api/src/client/index.js'
 
 import './index.html'
