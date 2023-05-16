@@ -31,6 +31,10 @@ openssl rand -base64 756 > <keyfile path>
 chmod 400 <keyfile path>
 ```
 
+If you have the `data` directory already existing, then you'll want to run the above commands from within the container which created the directory because it has the permissions for it:
+
+`docker run -it -v $PWD/data:/data/db -p 27017:27017 --network <network-name> --network-alias <network-alias> -e MONGO_INITDB_ROOT_USERNAME=<admin username> -e MONGO_INITDB_ROOT_PASSWORD=<admin password> mongo bash`
+
 ### Create the network
 `docker network create <network-name>`
 
