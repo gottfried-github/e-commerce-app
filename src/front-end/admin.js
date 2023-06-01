@@ -6,7 +6,7 @@ import api from '../../../fi-api/src/client/index.js'
 import './admin.html'
 
 function main() {
-    Main(document.querySelector('#main'), api)
+    Main(document.querySelector('#main'), api.admin)
 }
 
 document.addEventListener('DOMContentLoaded', main)
