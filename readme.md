@@ -7,7 +7,7 @@ A modular e-commerce application. Consists of [e-commerce-api](https://github.co
 # Run
 ## Preparations
 ### Clone the repos
-Clone [e-commerce-common](https://github.com/gottfried-github/e-commerce-common), [e-commerce-mongo](https://github.com/gottfried-github/e-commerce-mongo), [e-commerce-api](https://github.com/gottfried-github/e-commerce-api), [e-commerce-react](https://github.com/gottfried-github/e-commerce-react), [e-commerce-app](https://github.com/gottfried-github/e-commerce-app) into a common root directory. Perform all further instructions inside that directory.
+Clone [e-commerce-common](https://github.com/gottfried-github/e-commerce-common), [e-commerce-mongo](https://github.com/gottfried-github/e-commerce-mongo), [e-commerce-api](https://github.com/gottfried-github/e-commerce-api), [e-commerce-react](https://github.com/gottfried-github/e-commerce-react), [e-commerce-app](https://github.com/gottfried-github/e-commerce-app) and [e-commerce-signup](https://github.com/gottfried-github/e-commerce-signup) into a common root directory. Perform all further instructions inside that directory.
 
 ### Keyfile path
 `data/keyfile`
@@ -19,7 +19,7 @@ Clone [e-commerce-common](https://github.com/gottfried-github/e-commerce-common)
 `init.sh` will create user with name *app*. It needs us to pass it a password for this user.
 
 ## Instructions
-From each of the subfolders - `e-commerce-common`, `e-commerce-mongo`, `e-commerce-api`, `e-commerce-front-end`, `e-commerce-app` - run `npm install`. 
+From each of the subfolders - `e-commerce-common`, `e-commerce-mongo`, `e-commerce-api`, `e-commerce-front-end`, `e-commerce-app`, `e-commerce-signup` - run `npm install`. 
 
 All further steps have to be done from the root directory unless stated otherwise.
 
@@ -53,6 +53,13 @@ Run the node container, as described [below](#run-node-on-the-network); from the
 `APP_DB_NAME=app APP_DB_USER=app APP_DB_PASS=<app password> NET_NAME=<network-alias> fi-common/node_modules/.bin/migrate-mongo up -f fi-common/migrate-mongo-config.js`
 
 But before that, temporarily remove the `type: "module"` field in `fi-common/package.json` (where `migrate-mongo` is ran from) and `fi-store/package.json` (where the migrations directory is): `migrate-mongo` doesn't work with ES modules.
+
+### Creating the admin user for the app
+We need to create the initial admin user for the app.
+
+#### Instructions
+Run the node container, as described [below](#run-node-on-the-network); from the node container:
+`APP_DB_NAME=app APP_DB_USER=app APP_DB_PASS=<app password> NET_NAME=<network-alias> node e-commerce-signup/src/cli.js <app admin username> <app admin email> <app admin password>`
 
 ### Run the app
 #### Run node on the network
