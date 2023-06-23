@@ -1,6 +1,6 @@
 {
   "name": "bazar-app",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "demo usage of bazar suite",
   "main": "index.js",
   "type": "module",
