@@ -46,7 +46,7 @@ creates the admin user, with the `root` role, which, among other things, contain
 #### Initialize the replica set and the app user
 creates the app user with the following roles:
 `readWrite`; `dbAdmin` - to be able to perform `collMod` on collections.
-`./init.sh <admin password> <app password> <network name> <network alias>`
+`./e-commerce-app/init.sh <admin password> <app password> <network name> <network alias>`
 
 #### Apply migrations
 Run the node container, as described [below](#run-node-on-the-network); from the node container:
