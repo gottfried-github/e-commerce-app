@@ -5,7 +5,7 @@ import '../../../fi-front-end/src/styles/visitor.scss'
 import './visitor.html'
 
 function main() {
-    Main(document.querySelector('#main'), api.visitor)
+    Main(document.querySelector('.root'), api.visitor)
 }
 
 document.addEventListener('DOMContentLoaded', main)
