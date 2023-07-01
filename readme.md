@@ -13,6 +13,7 @@ Clone [e-commerce-common](https://github.com/gottfried-github/e-commerce-common)
 From each of the subfolders - `e-commerce-common`, `e-commerce-mongo`, `e-commerce-api`, `e-commerce-front-end`, `e-commerce-app`, `e-commerce-signup` - run `npm install`. 
 
 Then, run the initialization commands from within `e-commerce-common`:
+
 ```shell
 cd e-commerce-common
 
@@ -23,13 +24,15 @@ cd e-commerce-common
 ### Initialize the database
 Run the following command from within `e-commerce-common`.
 
-Run this command, wait a few moments, interrupt (`CTRL+C`) and then run it again [`1`] and, possibly, a few more times
+Run this command, wait a few moments, interrupt (`CTRL+C`) and then run it again [`1`] and, possibly, a few more times:
+
 `docker compose -f init-db.docker-compose.yml up`
 
 ### Apply migrations and create admin user for the app
 First, temporarily remove the `"type": "module"` declaration from `e-commerce-common/package.json` and `e-commerce-mongo/package.json` [`2`].
 
 Then, run:
+
 `docker compose -f init-app.docker-compose.yml up`
 
 Then, add the `"type": "module"` declaration back in.
