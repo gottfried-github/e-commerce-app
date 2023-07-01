@@ -29,12 +29,27 @@ cd e-commerce-common
 ./init.sh
 ```
 
-Run the following commands from within `e-commerce-common`:
-Run this command, wait a few moments, interrupt (`CTRL+C`) and then run it again [`1`]
+### Initialize the database
+Run the following command from within `e-commerce-common`.
+
+Run this command, wait a few moments, interrupt (`CTRL+C`) and then run it again [`1`] and, possibly, a few more times
 `docker compose -f init-db.docker-compose.yml up`
 
+### Apply migrations and create admin user for the app
+First, temporarily remove the `"type": "module"` declaration from `e-commerce-common/package.json` and `e-commerce-mongo/package.json` [`2`].
+
+Then, run:
+`docker compose -f init-app.docker-compose.yml up`
+
+Then, add the `"type": "module"` declaration back in.
+
+### Run the application
+From within `e-commerce-common`:
+`docker compose -f run.docker-compose.yml up`
+
 ### Notes
-1. For the first time, the script, run by the `init` container in `init-db.docker-compose.yml` fails to connect to the database, so I need to run the whole stack twice.
+1. Sometimes, the script, run by the `init` container in `init-db.docker-compose.yml` fails to connect to the database: the logs from the container indicate that. So if that happens, we need to run the whole stack multiple times.
+2. `migrate-mongo`, which is run in `init-app.sh`, doesn't work with es6 modules.
 
 ## Instructions
 From each of the subfolders - `e-commerce-common`, `e-commerce-mongo`, `e-commerce-api`, `e-commerce-front-end`, `e-commerce-app`, `e-commerce-signup` - run `npm install`. 
