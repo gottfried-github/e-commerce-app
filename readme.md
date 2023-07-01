@@ -36,6 +36,7 @@ Then, add the `"type": "module"` declaration back in.
 
 ### Run the application
 From within `e-commerce-common`:
+
 `docker compose -f run.docker-compose.yml up`
 
 ### Access the network
