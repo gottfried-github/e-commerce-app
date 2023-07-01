@@ -58,7 +58,7 @@ function main(port) {
     app.use('/api/', api)
     
     // send index.html from anywhere: let front-end handle routing
-    app.use("/admin/*", (req, res, next) => {
+    app.use(["/admin", "/admin/*"], (req, res, next) => {
         res.sendFile(path.join(__dirname, './dist/front-end/admin.html'))
     })
 

@@ -9,68 +9,42 @@ A modular e-commerce application. Consists of [e-commerce-api](https://github.co
 ### Clone the repos
 Clone [e-commerce-common](https://github.com/gottfried-github/e-commerce-common), [e-commerce-mongo](https://github.com/gottfried-github/e-commerce-mongo), [e-commerce-api](https://github.com/gottfried-github/e-commerce-api), [e-commerce-react](https://github.com/gottfried-github/e-commerce-react), [e-commerce-app](https://github.com/gottfried-github/e-commerce-app) and [e-commerce-signup](https://github.com/gottfried-github/e-commerce-signup) into a common root directory. Perform all further instructions inside that directory.
 
-### Keyfile path
-`data/keyfile`
-
-### Network name
-`e-commerce-wip` or whatever you like
-
-### Database user password
-`init.sh` will create user with name *app*. It needs us to pass it a password for this user.
-
 ## Instructions
 From each of the subfolders - `e-commerce-common`, `e-commerce-mongo`, `e-commerce-api`, `e-commerce-front-end`, `e-commerce-app`, `e-commerce-signup` - run `npm install`. 
 
-All further steps have to be done from the root directory unless stated otherwise.
-
-### Generate keyfile
-keyfile for database (see details [here](https://docs.mongodb.com/manual/tutorial/deploy-replica-set-with-keyfile-access-control/#create-a-keyfile))
-
+Then, run the initialization commands from within `e-commerce-common`:
 ```shell
-openssl rand -base64 756 > <keyfile path>
-chmod 400 <keyfile path>
+cd e-commerce-common
+
+# create data directory and a keyfile for the database
+./init.sh
 ```
 
-If you have the `data` directory already existing, then you'll want to run the above commands from within the container which created the directory because it has the permissions for it:
+### Initialize the database
+Run the following command from within `e-commerce-common`.
 
-`docker run -it -v $PWD/data:/data/db -p 27017:27017 --network <network-name> --network-alias <network-alias> -e MONGO_INITDB_ROOT_USERNAME=<admin username> -e MONGO_INITDB_ROOT_PASSWORD=<admin password> mongo bash`
+Run this command, wait a few moments, interrupt (`CTRL+C`) and then run it again [`1`] and, possibly, a few more times
+`docker compose -f init-db.docker-compose.yml up`
 
-### Create the network
-`docker network create <network-name>`
+### Apply migrations and create admin user for the app
+First, temporarily remove the `"type": "module"` declaration from `e-commerce-common/package.json` and `e-commerce-mongo/package.json` [`2`].
 
-### Mongodb instance and migrations
-#### Start mongo instance with a new replica set and the user admin, if not existing
-creates the admin user, with the `root` role, which, among other things, contains the `userAdminAnyDatabase` role, which allows to change data (including password) of any user in any database.
-`docker run --rm -v $PWD/data:/data/db -p 27017:27017 --network <network-name> --network-alias <network-alias> -e MONGO_INITDB_ROOT_USERNAME=<admin username> -e MONGO_INITDB_ROOT_PASSWORD=<admin password> mongo --replSet rs0 --keyFile /data/db/keyfile --bind_ip <network-alias> --dbpath /data/db`
+Then, run:
+`docker compose -f init-app.docker-compose.yml up`
 
-#### Initialize the replica set and the app user
-creates the app user with the following roles:
-`readWrite`; `dbAdmin` - to be able to perform `collMod` on collections.
-`./e-commerce-app/init.sh <admin password> <app password> <network name> <network alias>`
+Then, add the `"type": "module"` declaration back in.
 
-#### Apply migrations
-Run the node container, as described [below](#run-node-on-the-network); from the node container:
-`APP_DB_NAME=app APP_DB_USER=app APP_DB_PASS=<app password> NET_NAME=<network-alias> fi-common/node_modules/.bin/migrate-mongo up -f fi-common/migrate-mongo-config.js`
+### Run the application
+From within `e-commerce-common`:
+`docker compose -f run.docker-compose.yml up`
 
-But before that, temporarily remove the `type: "module"` field in `fi-common/package.json` (where `migrate-mongo` is ran from) and `fi-store/package.json` (where the migrations directory is): `migrate-mongo` doesn't work with ES modules.
+### Access the network
+run `docker ps`, find container with IMAGE of "fi-common_node" and copy it's ID (e.g., e28354082f09)
 
-### Creating the admin user for the app
-We need to create the initial admin user for the app.
-
-#### Instructions
-Run the node container, as described [below](#run-node-on-the-network); from the node container:
-`APP_DB_NAME=app APP_DB_USER=app APP_DB_PASS=<app password> NET_NAME=<network-alias> node e-commerce-signup/src/cli.js <app admin username> <app admin email> <app admin password>`
-
-### Run the app
-#### Run node on the network
-`docker run -it --tty -v "$(pwd)":/app -w /app --network <network-name> node bash`
-
-#### Inside the running container, run node with these environment variables
-`SESSION_SECRETS=<session secrets> APP_DB_NAME=app APP_DB_USER=app APP_DB_PASS=<app password> NET_NAME=<network-alias> node fi-app/index.js`
-
-#### Access the network
-run `docker ps`, find container with IMAGE of "node" and copy it's ID (e.g., e28354082f09)
-
-then `docker inspect` that container and find *NetworkSettings.Networks.mongodb-distinct.IPAddress*
+then `docker inspect` that container and find *NetworkSettings.Networks.fi-common_default.IPAddress*
 
 this is taken from [here](https://stackoverflow.com/a/56741737)
+
+### Notes
+1. Sometimes, the script, run by the `init` container in `init-db.docker-compose.yml` fails to connect to the database: the logs from the container indicate that. So if that happens, we need to run the whole stack multiple times.
+2. `migrate-mongo`, which is run in `init-app.sh`, doesn't work with es6 modules.
