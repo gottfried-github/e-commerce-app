@@ -39,9 +39,9 @@ From within `e-commerce-common`:
 `docker compose -f run.docker-compose.yml up`
 
 ### Access the network
-run `docker ps`, find container with IMAGE of "node" and copy it's ID (e.g., e28354082f09)
+run `docker ps`, find container with IMAGE of "fi-common_node" and copy it's ID (e.g., e28354082f09)
 
-then `docker inspect` that container and find *NetworkSettings.Networks.mongodb-distinct.IPAddress*
+then `docker inspect` that container and find *NetworkSettings.Networks.fi-common_default.IPAddress*
 
 this is taken from [here](https://stackoverflow.com/a/56741737)
 
