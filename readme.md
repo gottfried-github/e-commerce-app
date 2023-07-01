@@ -21,6 +21,24 @@ Clone [e-commerce-common](https://github.com/gottfried-github/e-commerce-common)
 ## Instructions
 From each of the subfolders - `e-commerce-common`, `e-commerce-mongo`, `e-commerce-api`, `e-commerce-front-end`, `e-commerce-app`, `e-commerce-signup` - run `npm install`. 
 
+Then, run the initialization commands from within `e-commerce-common`:
+```shell
+cd e-commerce-common
+
+# create data directory and a keyfile for the database
+./init.sh
+```
+
+Run the following commands from within `e-commerce-common`:
+Run this command, wait a few moments, interrupt (`CTRL+C`) and then run it again [`1`]
+`docker compose -f init-db.docker-compose.yml up`
+
+### Notes
+1. For the first time, the script, run by the `init` container in `init-db.docker-compose.yml` fails to connect to the database, so I need to run the whole stack twice.
+
+## Instructions
+From each of the subfolders - `e-commerce-common`, `e-commerce-mongo`, `e-commerce-api`, `e-commerce-front-end`, `e-commerce-app`, `e-commerce-signup` - run `npm install`. 
+
 All further steps have to be done from the root directory unless stated otherwise.
 
 ### Generate keyfile
