@@ -7,8 +7,8 @@ import SessionStorage from 'connect-mongo'
 import express from 'express'
 import {MongoClient} from 'mongodb'
 
-import {api as _api} from '../fi-api/src/server/index.js'
-import _store from '../fi-mongo/src/index.js'
+import {api as _api} from '../e-commerce-api/src/server/index.js'
+import _store from '../e-commerce-mongo/src/index.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 

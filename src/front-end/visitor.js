@@ -1,6 +1,6 @@
-import api from '../../../fi-api/src/client/index.js'
-import Main from '../../../fi-front-end/src/visitor.js'
-import '../../../fi-front-end/src/styles/visitor.scss'
+import api from '../../../e-commerce-api/src/client/index.js'
+import Main from '../../../e-commerce-front-end/src/visitor.js'
+import '../../../e-commerce-front-end/src/styles/visitor.scss'
 
 import './visitor.html'
 

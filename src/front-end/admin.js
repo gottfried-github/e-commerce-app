@@ -1,7 +1,7 @@
-import Main from '../../../fi-front-end/src/admin.js'
-import '../../../fi-front-end/src/styles/admin.scss'
+import Main from '../../../e-commerce-front-end/src/admin.js'
+import '../../../e-commerce-front-end/src/styles/admin.scss'
 
-import api from '../../../fi-api/src/client/index.js'
+import api from '../../../e-commerce-api/src/client/index.js'
 
 import './admin.html'
 
