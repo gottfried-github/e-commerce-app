@@ -24,23 +24,23 @@ cd e-commerce-common
 ### Initialize the database
 Run the following command from within `e-commerce-common`.
 
-Run this command, wait a few moments, interrupt (`CTRL+C`) and then run it again [`1`] and, possibly, a few more times:
+Run this command, wait 1 minute to make sure the script has connected to the database and executed [`1`], and then you can interrupt (`CTRL+c`):
 
-`docker compose -f init-db.docker-compose.yml up`
+`docker compose -f init-db.docker-compose.yml up --build`
 
 ### Apply migrations and create admin user for the app
 First, temporarily remove the `"type": "module"` declaration from `e-commerce-common/package.json` and `e-commerce-mongo/package.json` [`2`].
 
 Then, run:
 
-`docker compose -f init-app.docker-compose.yml up`
+`docker compose -f init-app.docker-compose.yml up --build`
 
 Then, add the `"type": "module"` declaration back in.
 
 ### Run the application
 From within `e-commerce-common`:
 
-`docker compose -f run.docker-compose.yml up`
+`docker compose -f run.docker-compose.yml up --build`
 
 ### Access the network
 run `docker ps`, find container with IMAGE of "fi-common_node" and copy it's ID (e.g., e28354082f09)
@@ -50,5 +50,5 @@ then `docker inspect` that container and find *NetworkSettings.Networks.fi-commo
 this is taken from [here](https://stackoverflow.com/a/56741737)
 
 ### Notes
-1. Sometimes, the script, run by the `init` container in `init-db.docker-compose.yml` fails to connect to the database: the logs from the container indicate that. So if that happens, we need to run the whole stack multiple times.
+1. The `init-db.sh` script gets run after 1 minute of sleep, to make sure the `init` container has established the database for connections. This is probably not the most elegant way of doing things but for now I haven't come up with a better way (the better way would be to somehow condition the `init` container and the `init-db.sh` script on the log output of the `base` container).
 2. `migrate-mongo`, which is run in `init-app.sh`, doesn't work with es6 modules.
