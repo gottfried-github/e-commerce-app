@@ -4,6 +4,8 @@ A modular e-commerce application. Consists of [e-commerce-api](https://github.co
 * [REST API specification](https://github.com/gottfried-github/e-commerce-api#rest-api)
 * [store API specification](https://github.com/gottfried-github/e-commerce-api#store-api)
 
+See the website live [here](http://gottfried.chost.com.ua:3000).
+
 # Run
 ## Preparations
 ### Clone the repos
