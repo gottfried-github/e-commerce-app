@@ -78,3 +78,14 @@ Inside the running container, run:
 
 2. `cd /app/e-commerce-common && ./backup-db-restore.sh <path to backup file inside container's volume>`
   E.g., `./backup-db-restore.sh /app/backup/db/e-commerce-app@0.4.2_2024-05-15.gz`
+
+## Uploads
+### Back up
+From `e-commerce-common`, run:
+
+`./backup-files.sh`
+
+This will produce a directory with a `.tar.gz` file inside in `backups/uploads/`
+
+### Restore
+In `e-commerce-app`, extract the `.tar.gz` file.
