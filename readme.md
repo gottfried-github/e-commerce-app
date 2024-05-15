@@ -23,14 +23,14 @@ cd e-commerce-common
 ./init.sh
 ```
 
-### Initialize the database
+### 1. Initialize the database
 From within `e-commerce-common`, run the following.
 
 Run this command and wait a few moments to make sure the script has connected to the database and initialized it (you should see `mongosh` logs from the `init` container in the stdout). Then you can interrupt (`CTRL+c`).
 
 `docker compose -f init-db.docker-compose.yml up --build`
 
-### Apply migrations and create admin user for the app
+### 2. Apply migrations and create admin user for the app
 First, temporarily remove the `"type": "module"` declaration from `e-commerce-common/package.json` and `e-commerce-mongo/package.json` [`1`].
 
 Then, from within `e-commerce-common`, run the following and wait a few moments until the scripts are executed (you should see logs from the `node` container):
@@ -39,7 +39,7 @@ Then, from within `e-commerce-common`, run the following and wait a few moments 
 
 Then, add the `"type": "module"` declaration back in.
 
-### Run the application
+### 3. Run the application
 From within `e-commerce-common`, run the following and wait a few moments until the server starts (you should see logs from the `node` container):
 
 `docker compose -f run.docker-compose.yml up --build`
@@ -53,3 +53,28 @@ this is taken from [here](https://stackoverflow.com/a/56741737)
 
 ### Notes
 1. `migrate-mongo`, which is run in `init-app.sh`, doesn't work with es6 modules.
+
+# Back up and restore
+## Database
+### Back up
+Run:
+
+1. `docker compose -f backup.docker-compose.yml run backup bash`
+
+Inside the running container, run:
+
+2. `cd /app/e-commerce-common && ./backup-db.sh`
+
+This will produce a database dump in `../backup/db/`
+
+### Restore
+Assuming you have a database and app user set up, i.e., you have run `1` and `2` from [Run](#run).
+
+Run:
+
+1. `docker compose -f backup.docker-compose.yml run backup bash`
+
+Inside the running container, run:
+
+2. `cd /app/e-commerce-common && ./backup-db-restore.sh <path to backup file inside container's volume>`
+  E.g., `./backup-db-restore.sh /app/backup/db/e-commerce-app@0.4.2_2024-05-15.gz`
