@@ -57,9 +57,9 @@ this is taken from [here](https://stackoverflow.com/a/56741737)
 # Back up and restore
 ## Database
 ### Back up
-Run:
+From `e-commerce-common` directory, run:
 
-1. `docker compose -f backup.docker-compose.yml run backup bash`
+1. `docker compose -f backup.docker-compose.yml run --build backup bash`
 
 Inside the running container, run:
 
@@ -89,3 +89,16 @@ This will produce a directory with a `.tar.gz` file inside in `backups/uploads/`
 
 ### Restore
 In `e-commerce-app`, extract the `.tar.gz` file.
+
+# Self-signed SSL certificate
+The instructions are taken from [`1`].
+
+In `e-commerce-app`:
+
+1. `mkdir cert && cd cert`
+2. generate a private key: `openssl genrsa -out key.pem`
+3. generate a Certificate Signing Request (CSR): `openssl req -new -key key.pem -out csr.pem`
+4. generate the SSL certificate: `openssl x509 -req -days 365 -in csr.pem -signkey key.pem -out cert.pem`
+
+## Refs
+1. https://dev.to/devland/how-to-generate-and-use-an-ssl-certificate-in-nodejs-2996
