@@ -1,9 +1,9 @@
 import path from "path";
 import { fileURLToPath } from "url";
-
+import fs from "fs";
+import https from "https";
 import session from "express-session";
 import SessionStorage from "connect-mongo";
-
 import express from "express";
 import { MongoClient } from "mongodb";
 
@@ -84,12 +84,37 @@ function main(port) {
   });
 
   /* start server */
-  const server = app.listen(3000, () => {
-    console.log("listening on port 3000");
-  });
+  let server = null;
+
+  if (process.env.NODE_ENV === "production") {
+    if (!process.env.SSL_CERT_KEY_PATH || !process.env.SSL_CERT_PATH)
+      throw new Error(
+        "SSL_CERT_KEY_PATH and SSL_CERT_PATH environment variables must be set if NODE_ENV is production"
+      );
+
+    server = https.createServer(
+      {
+        key: fs.readFileSync(
+          path.join(__dirname, process.env.SSL_CERT_KEY_PATH)
+        ),
+        cert: fs.readFileSync(path.join(__dirname, process.env.SSL_CERT_PATH)),
+      },
+      app
+    );
+
+    server.listen(port, () => {
+      console.log(`secure server listening on port ${port}`);
+    });
+  } else {
+    server = app.listen(port, () => {
+      console.log(`listening on port ${port}`);
+    });
+  }
 
   return { app, server, api, store };
 }
 
-main(3000);
-console.log(import.meta.url);
+const portStr = process.env.HTTP_PORT || "3000";
+
+main(parseInt(portStr, 10));
+console.log("process.env.NODE_ENV:", process.env.NODE_ENV);

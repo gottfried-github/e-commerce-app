@@ -40,8 +40,8 @@
   },
   "eCommerceDependencies": {
     "e-commerce-spec": "0.1.0",
-    "e-commerce-mongo": "0.17.0",
+    "e-commerce-mongo": "0.18.0",
     "e-commerce-api": "0.20.0",
-    "e-commerce-react": "0.17.0"
+    "e-commerce-react": "0.18.0"
   }
 }
