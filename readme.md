@@ -90,6 +90,21 @@ This will produce a directory with a `.tar.gz` file inside in `backups/uploads/`
 ### Restore
 In `e-commerce-app`, extract the `.tar.gz` file.
 
+## Run migrations
+First, temporarily remove the `"type": "module"` declaration from `e-commerce-common/package.json` and `e-commerce-mongo/package.json` [`1`].
+
+1. from `e-commerce-common`, run:
+
+`docker compose -f run.docker-compose.yml run node bash`
+
+2. inside the running container, run:
+
+`/app/e-commerce-common/node_modules/.bin/migrate-mongo up -f /app/e-commerce-common/migrate-mongo-config.js`
+
+or, for down:
+
+`/app/e-commerce-common/node_modules/.bin/migrate-mongo down -f /app/e-commerce-common/migrate-mongo-config.js`
+
 # Self-signed SSL certificate
 The instructions are taken from [`1`].
 
@@ -102,3 +117,11 @@ In `e-commerce-app`:
 
 ## Refs
 1. https://dev.to/devland/how-to-generate-and-use-an-ssl-certificate-in-nodejs-2996
+
+# `config.js`
+## `imageScaleTemplates`
+Create templates for scaling uploaded images.
+
+`suffix` will be appended to the scaled image file name and will be used to store the file name in the database.
+
+`width`, `height` and `options` are [`sharp`'s `resize` method arguments](https://sharp.pixelplumbing.com/api-resize).
