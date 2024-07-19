@@ -1,6 +1,6 @@
 {
   "name": "e-commerce-app",
-  "version": "0.6.0",
+  "version": "1.0.0",
   "description": "demo usage of bazar suite",
   "main": "index.js",
   "type": "module",
